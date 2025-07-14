@@ -53,3 +53,11 @@
     kubernetes.core.k8s:
       state: present
       src: pgadmin.yaml
+      namespace: default
+  - name: Get postgres password
+    ansible.builtin.shell: kubectl get secrets/postgresql -o json |python decode_password.py
+    register: result
+
+  - name: Print return information from the previous task
+    ansible.builtin.debug:
+       msg: "{{ result.stdout }}"
