@@ -49,3 +49,7 @@
       name: migrate1
       chart_ref: chart
       release_namespace: default
+  - name: install pgadmin
+    kubernetes.core.k8s:
+      state: present
+      src: pgadmin.yaml
